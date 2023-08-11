@@ -16,8 +16,32 @@
       {
         "command": "baibug.helloWorld",
         "title": "Hello World"
+      },
+      {
+        "command": "extension.openSidebar",
+        "title": "Open Sidebar"
       }
-    ]
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "baibugSidebar",
+          "title": "BAIbug",
+          "icon": "assets/icons/logo.svg"
+        }
+      ]
+    },
+    "views": {
+      "baibugSidebar": [
+        {
+          "id": "baibug-sidebar",
+          "name": "BAIbug",
+          "contextualTitle": "BAIBug",
+          "visibility": "visible",
+          "type": "webview"
+        }
+      ]
+    }
   },
   "scripts": {
     "lint": "eslint .",
