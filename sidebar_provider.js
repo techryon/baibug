@@ -52,44 +52,52 @@ class SidebarProvider {
     }
 
     _getHtmlForWebview(webview) {
-        return `<!DOCTYPE html>
+        /*html*/
+        return `
+          <!DOCTYPE html>
             <html lang="en">
             <head>
             <script>
-              var myHeaders = new Headers();
-              myHeaders.append("Content-Type", "application/json");
-              myHeaders.append("Accept", "application/json");
-              myHeaders.append("Authorization", "Bearer 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");
-              
-              const raw = JSON.stringify(
-                {
-                  "model": "gpt-3.5-turbo",
-                  "messages": [
-                    {
-                      "role": "user",
-                      "content": "Say hi to the world!"
-                    }
-                          
-                  ],
-                  "temperature": 0,
-                  "max_tokens": 7
-                }
-              )
-              
-              var requestOptions = {
-                method: 'POST',
-                headers: myHeaders,
-                body: raw,
-                redirect: 'manual'
-              };
-              
-              fetch("https://api.openai.com/v1/chat/completions", requestOptions)
+              function callOpenAi() {
+                var myHeaders = new Headers();
+                var token = "YOUR_TOKEN_HERE";
+                myHeaders.append("Content-Type", "application/json");
+                myHeaders.append("Accept", "application/json");
+                myHeaders.append("Authorization", "Bearer " + token);
+
+                const raw = JSON.stringify(
+                  {
+                    "model": "gpt-3.5-turbo",
+                    "messages": [
+                      {
+                        "role": "user",
+                        "content": "Foobar"
+                      },
+                      {
+                        "role": "user",
+                        "content": "Foobar"
+                      },
+                      {
+                        "role": "user",
+                        "content": "Foobar"
+                      },    
+                    ],
+                    "temperature": 0,
+                    "max_tokens": 7
+                  }
+                )
+
+                var requestOptions = {
+                  method: 'POST',
+                  headers: myHeaders,
+                  body: raw,
+                  redirect: 'manual'
+                };
+                
+                fetch("https://api.openai.com/v1/chat/completions", requestOptions)
                 .then(response => response.text())
                 .then(result => console.log(result))
                 .catch(error => console.log('error', error));
-
-              function myFunction() {
-                console.log("Hello World!");
               }
             </script>
             </head>
@@ -97,17 +105,22 @@ class SidebarProvider {
                 <div id="app">
                   <ul id="error_list">
                     <li>
-                      <a class="test" onclick="myFunction()">
+                      <a class="test" onclick="callOpenAi()">
                         Foo
                       </a>
                     </li>
                   </ul>
+
+                  <div id="results">
+                    // Put results here
+                  </div>
                 </div>
                 <script>
 
                 </script>
             </body>
-            </html>`;
+          </html>
+        `;
     }
 }
 
